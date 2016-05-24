@@ -10,7 +10,9 @@ License: GPLv2+
 */
 
 // Useful global constants
-define( 'PW_GALLERY_URL', plugin_dir_url( __FILE__ ) );
+if ( ! defined( 'PW_GALLERY_URL' ) ) {
+  define( 'PW_GALLERY_URL', plugin_dir_url( __FILE__ ) );
+}
 
 /**
  * Render field
@@ -18,14 +20,17 @@ define( 'PW_GALLERY_URL', plugin_dir_url( __FILE__ ) );
 function pw_gallery_field( $field, $meta ) {
 	wp_enqueue_script( 'pw_gallery_init', PW_GALLERY_URL . 'js/script.js', array( 'jquery' ), null );
 
+  $hidden = 'hidden';
+
 	if ( ! empty( $meta ) ) {
 		$meta = implode( ',', $meta );
+    $hidden = '';
 	}
 
 	echo '<div class="pw-gallery">';
 	echo '	<input type="hidden" id="' . $field->args( 'id' ) . '" name="' . $field->args( 'id' ) . '" value="' . $meta . '" />';
-	echo '	<input type="button" class="manage-gallery button" value="' . ( $field->args( 'button' ) ? $field->args( 'button' ) : 'Manage gallery' ) . '" style="margin-left: 0;" />';
-	echo '	<input type="button" class="clear-gallery button" value="' . ( $field->args( 'clear-button' ) ? $field->args( 'clear-button' ) : 'Clear gallery' ) . '" style="margin-left: 0;" />';
+  echo '  <input type="button" class="manage-gallery button" value="' . ( $field->args( 'button' ) ? $field->args( 'button' ) : 'Manage gallery' ) . '" style="margin-left: 0;" />';
+	echo '	<input type="button" class="clear-gallery button ' . $hidden . '" value="' . ( $field->args( 'clear-button' ) ? $field->args( 'clear-button' ) : 'Clear gallery' ) . '" style="margin-left: 0;" />';
 	echo '</div>';
 
 	$desc = $field->args( 'desc' );
