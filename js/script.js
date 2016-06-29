@@ -1,33 +1,47 @@
 jQuery( document ).ready(function($) {
-	$('.pw-gallery').each(function() {
-		var instance = this;
+  $('.pw-gallery').each(function() {
+    var instance = this;
+    var $thumbnailsList = $(instance).parents().find('.cmb2-media-status');
 
-		$('input[type=button]', instance).click(function() {
-			var gallerysc = '[gallery ids="' + $('input[type=hidden]', instance).val() + '"]';
-			wp.media.gallery.edit(gallerysc).on('update', function(g) {
-				var id_array = [];
-				var fileGroup = [];
+    $('input.manage-gallery', instance).click(function() {
+      var gallerysc = '[gallery ids="' + $('input[type=hidden]', instance).val() + '"]';
 
-				$( ".cmb2-media-status li" ).remove();
+      wp.media.gallery.edit(gallerysc).on('update', function(update) {
+        var id_array = [];
+        var fileGroup = [];
 
-				$.each(g.models, function(id, img) {
+        $thumbnailsList.find('li').remove();
 
-					id_array.push(this.id);
-					var width = this.attributes.sizes.thumbnail.width ? this.attributes.sizes.thumbnail.width  : 50;
-					var height = this.attributes.sizes.thumbnail.height ? this.attributes.sizes.thumbnail.height  : 50;
+        $.each(update.models, function(id, img) {
+          id_array.push(img.id);
 
-					uploadStatus = '<li class="img-status"><img width="'+width+'" height="'+height+'" src="' + this.attributes.sizes.thumbnail.url+ '" class="attachment-50x50" alt=""></li>';
-					fileGroup.push( uploadStatus );
+          var width = img.attributes.sizes.thumbnail.width ? img.attributes.sizes.thumbnail.width  : 50;
+          var height = img.attributes.sizes.thumbnail.height ? img.attributes.sizes.thumbnail.height  : 50;
 
-				});
+          uploadStatus = '<li class="img-status"><img width="'+width+'" height="'+height+'" src="' + img.attributes.sizes.thumbnail.url+ '" class="attachment-50x50" alt=""></li>';
+          fileGroup.push( uploadStatus );
+        });
 
-					$('input[type=hidden]', instance).val(id_array.join(","));
+        $('input[type=hidden]', instance).val(id_array.join(","));
 
-				$( fileGroup ).each( function() {
+        $( fileGroup ).each( function() {
 
-					$('.cmb2-media-status').slideDown().append(this);
-				});
-			});
-		});
-	});
+          $thumbnailsList.slideDown().append(this);
+        });
+
+        if( id_array.length > 0 ) {
+          $('input.clear-gallery', instance).removeClass('hidden');
+        }
+      });
+    });
+
+    $('input.clear-gallery', instance).click(function() {
+      var gallerysc = '[gallery ids="' + $('input[type=hidden]', instance).val() + '"]';
+
+      $('input[type=hidden]', instance).val('');
+      $('input.clear-gallery', instance).addClass('hidden');
+
+      $thumbnailsList.find('li').remove();
+    });
+  });
 });
