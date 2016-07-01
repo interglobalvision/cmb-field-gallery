@@ -27,7 +27,9 @@ function pw_gallery_field( $field, $meta ) {
     $hidden = '';
 	}
 
-	$img_size = (!empty($field->args('preview_size'))) ? $field->args('preview_size') : array(50, 50);
+  $preview_size = $field->args('preview_size');
+
+	$img_size = !empty($preview_size) ? $preview_size : array(50, 50);
 
 	echo '<div class="pw-gallery">';
 	echo '	<input type="hidden" id="' . $field->args( 'id' ) . '" name="' . $field->args( 'id' ) . '" value="' . $meta . '" />';
@@ -43,9 +45,7 @@ function pw_gallery_field( $field, $meta ) {
 	$ids = explode(',', $meta);
 
 	foreach($ids as $id) {
-
 		echo '<li class="img-status">'. wp_get_attachment_image( $id, $img_size ) .'</li>';
-
  	}
 
 	echo '</ul>';
