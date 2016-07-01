@@ -38,6 +38,7 @@ array(
 	'clear-button' => 'Clear gallery', // Optionally set clear button label
 	'id'   => $prefix . 'gallery_images',
 	'type' => 'pw_gallery',
+	'preview_size' => array( 150, 150 ), // Set the size of the thumbnails
 	'sanitization_cb' => 'pw_gallery_field_sanitise',
 ),
 ```
@@ -49,7 +50,9 @@ array(
 ![Image](screenshot-2.png?raw=true)
 
 ## To-do
-* Thumbnail previews
+
+* Add gulpfile
+* Rewrite
 
 ## Example front-end output
 

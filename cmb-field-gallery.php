@@ -27,6 +27,10 @@ function pw_gallery_field( $field, $meta ) {
     $hidden = '';
 	}
 
+  $preview_size = $field->args('preview_size');
+
+	$img_size = !empty($preview_size) ? $preview_size : array(50, 50);
+
 	echo '<div class="pw-gallery">';
 	echo '	<input type="hidden" id="' . $field->args( 'id' ) . '" name="' . $field->args( 'id' ) . '" value="' . $meta . '" />';
   echo '  <input type="button" class="manage-gallery button" value="' . ( $field->args( 'button' ) ? $field->args( 'button' ) : 'Manage gallery' ) . '" style="margin-left: 0;" />';
@@ -35,7 +39,19 @@ function pw_gallery_field( $field, $meta ) {
 
 	$desc = $field->args( 'desc' );
 	if ( ! empty( $desc ) ) echo '<p class="cmb2-metabox-description">' . $desc . '</p>';
+
+	echo '<ul id="'.$field->args( 'id' ).'-status" class="cmb2-media-status">';
+
+	$ids = explode(',', $meta);
+
+	foreach($ids as $id) {
+		echo '<li class="img-status">'. wp_get_attachment_image( $id, $img_size ) .'</li>';
+ 	}
+
+	echo '</ul>';
+
 }
+
 add_filter( 'cmb2_render_pw_gallery', 'pw_gallery_field', 10, 2 );
 
 
