@@ -1,7 +1,7 @@
 jQuery( document ).ready(function($) {
   $('.pw-gallery').each(function() {
     var instance = this;
-    var $thumbnailsList = $(instance).parents().find('.cmb2-media-status');
+    var $thumbnailsList = $(instance).parents().children('.cmb2-media-status');
 
     $('input.manage-gallery', instance).click(function() {
       var gallerysc = '[gallery ids="' + $('input[type=hidden]', instance).val() + '"]';
@@ -25,7 +25,6 @@ jQuery( document ).ready(function($) {
         $('input[type=hidden]', instance).val(id_array.join(","));
 
         $( fileGroup ).each( function() {
-
           $thumbnailsList.slideDown().append(this);
         });
 
