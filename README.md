@@ -39,9 +39,11 @@ array(
 	'id'   => $prefix . 'gallery_images',
 	'type' => 'pw_gallery',
 	'preview_size' => array( 150, 150 ), // Set the size of the thumbnails
-	'sanitization_cb' => 'pw_gallery_field_sanitise',
+	'sanitization_cb' => 'pw_gallery_field_sanitise', // REQUIRED
 ),
 ```
+
+The sanitization callback value is required for the functioning of the plugin. The preview size is optional but recommended.
 
 ## Screenshots
 
