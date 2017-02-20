@@ -6,6 +6,10 @@
     {
       "name": "mustardBees",
       "role": "Developer"
+    },
+    {
+      "name": "Interglobal Vision",
+      "role": "Maintainer"
     }
   ],
   "keywords": ["wordpress", "plugin", "metabox"],
