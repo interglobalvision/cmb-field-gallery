@@ -1,0 +1,29 @@
+{
+  "name": "interglobalvision/cmb-field-gallery",
+  "description": "Gallery field type for CMB2.",
+  "license": "GPL-2.0+",
+  "authors": [
+    {
+      "name": "mustardBees",
+      "role": "Developer"
+    },
+    {
+      "name": "Interglobal Vision",
+      "role": "Maintainer"
+    }
+  ],
+  "keywords": ["wordpress", "plugin", "metabox"],
+  "homepage": "https://github.com/interglobalvision/cmb-field-gallery",
+  "type": "wordpress-plugin",
+  "support": {
+    "issues": "https://github.com/mustardBees/cmb-field-gallery/issues",
+    "source": "https://github.com/mustardBees/cmb-field-gallery"
+  },
+  "require": {
+    "php": ">5.2.4",
+    "webdevstudios/cmb2": "*"
+  },
+  "suggest": {
+    "composer/installers": "~1.0"
+  }
+}
