@@ -1,6 +1,7 @@
 {
   "name": "interglobalvision/cmb-field-gallery",
   "description": "Gallery field type for CMB2.",
+  "version": "1.0.0",
   "license": "GPL-2.0+",
   "authors": [
     {
